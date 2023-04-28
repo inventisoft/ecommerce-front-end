@@ -1,18 +1,26 @@
-import { Box, Button, CssBaseline, ThemeProvider, createTheme } from "@mui/material"
+import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material"
 import AppBar from "./components/appBar";
-// import PrimaryAppbar from './components/primaryAppbar';
 import appTheme, { palette } from './styles/theme';
 import AppState from "./state/appState";
-// import AppState from './state/appState';
-// import { useMemo, useState } from 'react';
-// import AppDrawer from './components/appDrawer';
+import { useMemo, useState } from "react";
 
 
 
-function app() {
+function App() {
+
+  const [mode, setMode] = useState('light');
+
+  const colorMode = useMemo(
+    () => ({
+      toggleMode: () => {
+        setMode( prevMode => prevMode === 'light' ? 'dark' : 'light' );
+      }
+    }),[]
+  );
+
 
   const theme = createTheme({
-    palette: {...palette},
+    palette: {...palette, mode: mode},
     ...appTheme
   })
   
@@ -21,7 +29,7 @@ function app() {
       <AppState>
         <Box sx={{ display: 'flex', flexDirection: 'column'}} >
           <CssBaseline/>
-            <AppBar />
+            <AppBar switchColorMode={ colorMode.toggleMode} />
         </Box>
       </AppState>
     </ThemeProvider>
@@ -29,5 +37,4 @@ function app() {
 
 }
 
-
-export default app;
+export default App;

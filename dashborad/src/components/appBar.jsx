@@ -1,4 +1,4 @@
-import { Box, FormControlLabel, FormGroup, IconButton, Menu, MenuItem, Switch, Toolbar, Typography, colors, useMediaQuery } from "@mui/material"
+import { Box, FormControlLabel, FormGroup, IconButton, Menu, MenuItem, Switch, Toolbar, Typography, useMediaQuery } from "@mui/material"
 import { useTheme, styled, alpha } from "@mui/material/styles"
 import MuiAppBar from "@mui/material/AppBar"
 import MenuIcon from '@mui/icons-material/Menu';
@@ -73,18 +73,20 @@ const StyledSearchInputBase = styled(InputBase)(({theme}) => ({
       }
 }));
 
-export default function AppBar(){
+export default function AppBar( {switchColorMode }){
 
   const { state, dispatch} = useAppState();
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [themeModeSwitch, setThemeModeSwitch] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
 
-  const switchThemeMode = () => {
-      dispatch({type: 'theme-switch',});
-  }
+  useEffect(() => {
+    dispatch({type: 'theme-switch',});
+    switchColorMode(themeModeSwitch);
+  },[themeModeSwitch]);
 
   return (
         <Box>
@@ -146,8 +148,8 @@ export default function AppBar(){
                 <MenuItem>
               <FormGroup>
                 <FormControlLabel 
-                    control={<Switch 
-                      onClick={() => switchThemeMode(s => !s) }
+                    control={<Switch checked={themeModeSwitch}
+                      onClick={() => setThemeModeSwitch(s => !s) }
                     />}
                     label={ state.drawer === 'light' ? 'light' : 'Dark'}
                 />
