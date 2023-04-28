@@ -2,6 +2,7 @@ import { Box, Button, CssBaseline, ThemeProvider, createTheme } from "@mui/mater
 import AppBar from "./components/appBar";
 // import PrimaryAppbar from './components/primaryAppbar';
 import appTheme, { palette } from './styles/theme';
+import AppState from "./state/appState";
 // import AppState from './state/appState';
 // import { useMemo, useState } from 'react';
 // import AppDrawer from './components/appDrawer';
@@ -17,10 +18,12 @@ function app() {
   
   return (
     <ThemeProvider theme={theme}>
+      <AppState>
         <Box sx={{ display: 'flex', flexDirection: 'column'}} >
           <CssBaseline/>
             <AppBar />
         </Box>
+      </AppState>
     </ThemeProvider>
   )
 

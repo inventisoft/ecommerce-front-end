@@ -44,17 +44,51 @@ const Search = styled('div')(({theme}) => ({
     marginLeft: theme.spacing(1),
     width:'auto'
   }
+}));
 
+
+const SearchIconWrapper = styled('div')(({theme}) => ({
+  position: 'absolute',
+  height: '100%',
+  padding: theme.spacing(0, 2),
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  pointerEvents: 'none',
+}));
+
+const StyledSearchInputBase = styled(InputBase)(({theme}) => ({
+  color: 'inherit',
+    "& .MuiInputBase-input": {
+          padding: theme.spacing(1, 1, 1, 0),
+          paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+          transition: theme.transitions.create('width'),
+          width: '100%',
+            [theme.breakpoints.up('sm')]: {
+              width: '18ch',
+              '&:focus': {
+                width: '24ch'
+              }
+          }
+      }
 }));
 
 export default function AppBar(){
 
+  const { state, dispatch} = useAppState();
   const theme = useTheme()
-  const [ drawer, setDrawer] = useState(false)
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+
+  const switchThemeMode = () => {
+      dispatch({type: 'theme-switch',});
+  }
 
   return (
         <Box>
-          <AppNabar position="fixed" open={drawer}>
+          <AppNabar position="fixed" open={state.drawer}>
           <Toolbar>
           <IconButton
             size="large"
@@ -62,30 +96,64 @@ export default function AppBar(){
             edge="start"
             sx={{
               marginRight: 5,
-              ...(drawer && { display: 'none'})
+              ...(state.drawer && { display: 'none'})
             }}
-            onClick={()=> setDrawer( s => !s)}
+            onClick={()=> dispatch({type: 'drawer'})}
           
           >
             <MenuIcon />
             </IconButton>
-              <Typography variant="h6" 
-                  sx={{fontFamily: "'Play', sans-serif", 
-                        flexGrow: 1,
-                        display: {sx:'none', sm: 'block'} 
-                        
-                      }}>
-              Admin Store
-              </Typography>
-              <Search>
-              {/* <SearchIconWrapper> */}
-                  <SearchIcon />
-              {/* </SearchIconWrapper> */}
-              {/* <SttledSearchInputBase /> */}
-            </Search>
-            </Toolbar>
+                <Typography variant="h6" 
+                    sx={{fontFamily: "'Play', sans-serif", 
+                          flexGrow: 1,
+                          display: {sx:'none', sm: 'block'} 
+                          
+                        }}>
+                Admin Store
+                </Typography>
+                  <Search>
+                      <SearchIconWrapper>
+                          <SearchIcon />
+                      </SearchIconWrapper>
+                      <StyledSearchInputBase />
+                </Search>
+                <Box sx={{
+                      width: {
+                        xs: '100%',
+                        md: '10%'
+                      }
+                  }}
+                  display='flex'
+                  justifyContent='space-eventy'
+                  alignItems='center'
+                >
+                  {matches &&  <SearchIcon />}
+                    <NotificationsIcon />
+                    <AccountCircleIcon />
+                    <IconButton 
+                      onClick={(e) => setAnchorEl(e.currentTarget)}
+                      sx={{color: 'inherit'}} >
+                        <SettingsIcon />
+                    </IconButton>
+                </Box>
+              </Toolbar>
           </AppNabar>
-
+          <Menu
+              id="settings-menu"
+              anchorEl={!!anchorEl}
+              open={!!anchorEl}
+              onClose={() => {setAnchorEl(null)}}>
+                <MenuItem>
+              <FormGroup>
+                <FormControlLabel 
+                    control={<Switch 
+                      onClick={() => switchThemeMode(s => !s) }
+                    />}
+                    label={ state.drawer === 'light' ? 'light' : 'Dark'}
+                />
+              </FormGroup>
+          </MenuItem>
+          </Menu>
         </Box>
   )
 }
