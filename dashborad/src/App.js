@@ -3,6 +3,7 @@ import AppBar from "./components/appBar";
 import appTheme, { palette } from './styles/theme';
 import AppState from "./state/appState";
 import { useMemo, useState } from "react";
+import AppDrawer from "./components/appDrawer";
 
 
 
@@ -29,6 +30,7 @@ function App() {
       <AppState>
         <Box sx={{ display: 'flex', flexDirection: 'column'}} >
           <CssBaseline/>
+            <AppDrawer />
             <AppBar switchColorMode={ colorMode.toggleMode} />
         </Box>
       </AppState>

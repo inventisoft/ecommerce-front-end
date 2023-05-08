@@ -142,7 +142,7 @@ export default function AppBar( {switchColorMode }){
           </AppNabar>
           <Menu
               id="settings-menu"
-              anchorEl={!!anchorEl}
+              anchorEl={anchorEl}
               open={!!anchorEl}
               onClose={() => {setAnchorEl(null)}}>
                 <MenuItem>
