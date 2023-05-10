@@ -4,6 +4,7 @@ import appTheme, { palette } from './styles/theme';
 import AppState from "./state/appState";
 import { useMemo, useState } from "react";
 import AppDrawer from "./components/appDrawer";
+import { BrowserRouter } from "react-router-dom";
 
 
 
@@ -27,13 +28,15 @@ function App() {
   
   return (
     <ThemeProvider theme={theme}>
-      <AppState>
-        <Box sx={{ display: 'flex', flexDirection: 'column'}} >
-          <CssBaseline/>
-            <AppDrawer />
-            <AppBar switchColorMode={ colorMode.toggleMode} />
-        </Box>
-      </AppState>
+      <BrowserRouter>
+          <AppState>
+            <Box sx={{ display: 'flex', flexDirection: 'column'}} >
+              <CssBaseline/>
+                <AppDrawer />
+                <AppBar switchColorMode={ colorMode.toggleMode} />
+            </Box>
+          </AppState>
+      </BrowserRouter>
     </ThemeProvider>
   )
 
