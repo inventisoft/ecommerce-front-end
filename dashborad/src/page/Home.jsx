@@ -1,4 +1,4 @@
-export default function Home() {
+function Home() {
 
   return (
     <>
@@ -6,3 +6,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

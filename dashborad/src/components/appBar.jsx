@@ -89,73 +89,73 @@ export default function AppBar( {switchColorMode }){
   },[themeModeSwitch]);
 
   return (
-        <Box>
-          <AppNabar position="fixed" open={state.drawer}>
-          <Toolbar>
-          <IconButton
-            size="large"
-            color="inherit"
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(state.drawer && { display: 'none'})
+    <Box>
+    <AppNabar position="fixed" open={state.drawer}>
+    <Toolbar>
+    <IconButton
+      size="large"
+      color="inherit"
+      edge="start"
+      sx={{
+        marginRight: 5,
+        ...(state.drawer && { display: 'none'})
+      }}
+      onClick={()=> dispatch({type: 'drawer'})}
+
+    >
+      <MenuIcon />
+      </IconButton>
+          <Typography variant="h6"
+              sx={{fontFamily: "'Play', sans-serif",
+                    flexGrow: 1,
+                    display: {sx:'none', sm: 'block'}
+
+                  }}>
+          Admin Store
+          </Typography>
+            <Search>
+                <SearchIconWrapper>
+                    <SearchIcon />
+                </SearchIconWrapper>
+                <StyledSearchInputBase />
+          </Search>
+          <Box sx={{
+                width: {
+                  xs: '100%',
+                  md: '10%'
+                }
             }}
-            onClick={()=> dispatch({type: 'drawer'})}
-          
+            display='flex'
+            justifyContent='space-eventy'
+            alignItems='center'
           >
-            <MenuIcon />
-            </IconButton>
-                <Typography variant="h6" 
-                    sx={{fontFamily: "'Play', sans-serif", 
-                          flexGrow: 1,
-                          display: {sx:'none', sm: 'block'} 
-                          
-                        }}>
-                Admin Store
-                </Typography>
-                  <Search>
-                      <SearchIconWrapper>
-                          <SearchIcon />
-                      </SearchIconWrapper>
-                      <StyledSearchInputBase />
-                </Search>
-                <Box sx={{
-                      width: {
-                        xs: '100%',
-                        md: '10%'
-                      }
-                  }}
-                  display='flex'
-                  justifyContent='space-eventy'
-                  alignItems='center'
-                >
-                  {matches &&  <SearchIcon />}
-                    <NotificationsIcon />
-                    <AccountCircleIcon />
-                    <IconButton 
-                      onClick={(e) => setAnchorEl(e.currentTarget)}
-                      sx={{color: 'inherit'}} >
-                        <SettingsIcon />
-                    </IconButton>
-                </Box>
-              </Toolbar>
-          </AppNabar>
-          <Menu
-              id="settings-menu"
-              anchorEl={anchorEl}
-              open={!!anchorEl}
-              onClose={() => {setAnchorEl(null)}}>
-                <MenuItem>
-              <FormGroup>
-                <FormControlLabel 
-                    control={<Switch checked={themeModeSwitch}
-                      onClick={() => setThemeModeSwitch(s => !s) }
-                    />}
-                    label={ state.drawer === 'light' ? 'light' : 'Dark'}
-                />
-              </FormGroup>
-          </MenuItem>
-          </Menu>
-        </Box>
+            {matches &&  <SearchIcon />}
+              <NotificationsIcon />
+              <AccountCircleIcon />
+              <IconButton
+                onClick={(e) => setAnchorEl(e.currentTarget)}
+                sx={{color: 'inherit'}} >
+                  <SettingsIcon />
+              </IconButton>
+          </Box>
+        </Toolbar>
+    </AppNabar>
+    <Menu
+        id="settings-menu"
+        anchorEl={anchorEl}
+        open={!!anchorEl}
+        onClose={() => {setAnchorEl(null)}}>
+          <MenuItem>
+        <FormGroup>
+          <FormControlLabel
+              control={<Switch checked={themeModeSwitch}
+                onClick={() => setThemeModeSwitch(s => !s) }
+              />}
+              label={ state.drawer === 'light' ? 'light' : 'Dark'}
+          />
+        </FormGroup>
+    </MenuItem>
+    </Menu>
+  </Box>
   )
 }

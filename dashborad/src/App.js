@@ -1,10 +1,14 @@
-import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material"
+import { Box, ThemeProvider, createTheme } from "@mui/material"
 import AppBar from "./components/appBar";
 import appTheme, { palette } from './styles/theme';
 import AppState from "./state/appState";
 import { useMemo, useState } from "react";
 import AppDrawer from "./components/appDrawer";
-import { BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter} from 'react-router-dom'
+import Producto from "./page/Producto";
+import Home from "./page/Home";
+import Categoria from "./page/Categoria";
+import { styled } from "@mui/material/styles"
 
 
 
@@ -25,19 +29,36 @@ function App() {
     palette: {...palette, mode: mode},
     ...appTheme
   })
+
+  const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+}));
   
-  return (
+  return ( 
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-          <AppState>
-            <Box sx={{ display: 'flex', flexDirection: 'column'}} >
-              <CssBaseline/>
-                <AppDrawer />
-                <AppBar switchColorMode={ colorMode.toggleMode} />
+
+    <Box sx={{ display: 'flex' }}>
+      <AppState>
+            <AppDrawer />
+            <AppBar switchColorMode={ colorMode.toggleMode} />
+            <Box component="main">
+                <DrawerHeader />
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/producto" element={<Producto />} />
+                        <Route path="/categoria" element={<Categoria />} />
+                    </Routes>
+                </BrowserRouter>
             </Box>
-          </AppState>
-      </BrowserRouter>
-    </ThemeProvider>
+      </AppState>
+    </Box>
+</ThemeProvider>
   )
 
 }

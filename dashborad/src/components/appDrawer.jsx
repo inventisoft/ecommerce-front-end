@@ -16,6 +16,7 @@ import { Typography } from '@mui/material';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 
+
 export const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -92,7 +93,8 @@ export default function AppDrawer() {
         <List>
             <ListItem disablePadding sx={{ display: 'block' }}>
               <ListItemButton
-                sx={{justifyContent: state.drawer ? 'initial' : 'center'}}>
+                  to="/home"
+                  sx={{justifyContent: state.drawer ? 'initial' : 'center'}} >
                 <ListItemIcon
                   sx={{
                     mr: state.drawer ? 3 : 'auto',
@@ -106,7 +108,9 @@ export default function AppDrawer() {
 
             <ListItem disablePadding sx={{ display: 'block' }}>
               <ListItemButton
-                sx={{justifyContent: state.drawer ? 'initial' : 'center'}}>
+                  to='producto'
+                  
+                  sx={{justifyContent: state.drawer ? 'initial' : 'center'}}>
                 <ListItemIcon
                   sx={{
                     mr: state.drawer ? 3 : 'auto',
@@ -120,6 +124,7 @@ export default function AppDrawer() {
 
             <ListItem disablePadding sx={{ display: 'block' }}>
               <ListItemButton
+                to='categoria'
                 sx={{justifyContent: state.drawer ? 'initial' : 'center'}}>
                 <ListItemIcon
                   sx={{
