@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 import Box from '@mui/material/Box';
 
 
-export default function Home() {
+export default function Categori() {
   return (
     <>
     <Navbar />
@@ -12,7 +12,7 @@ export default function Home() {
       <Box sx={{ display: 'flex' }}>
         <Sidenav />
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            <h1>Home</h1>
+            <h1>Categoria</h1>
           </Box>
       </Box>
     </>
