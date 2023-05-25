@@ -1,21 +1,73 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-import { ThemeProvider } from '@mui/material/styles';
 import theme from './themeConfig';
 import { MainNav} from './mainNav/MainNav';
-import { Carousel } from './carousel/Carousel';
-import { CardProduct } from './cardProduct/CardProduct';
+import { CarouselSlider } from './carousel/CarouselSlider';
+import { Box } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
+import { SearcherCard } from './SearcherCard/SearcherCard';
+import { CarouselCard } from './carouselCard/CarouselCard';
 
-const images = [
+const clothes = [
+  {
+    name: 'chopa de Lana',
+    detalle: 'Chompa de mujer para el invierno',
+    genero:'mujer',
+    price:'250,00',
+    imgPath:
+      'https://cachemirasss.cl/wp-content/uploads/2018/02/05-01-cachemiras-ss-chalecos-sueter-ropa-chile-santiago-moda-lana.jpg',
+  },
+  {
+    name: 'chopa ligera',
+    detalle: 'Chompa para hombre para verano',
+    genero:'hombre',
+    price:'150,00',
+    imgPath:
+      'https://i.pinimg.com/474x/32/b8/56/32b856db66907fd5237491002c41c45c.jpg',
+  },
+  {
+    name: 'chopa ligera',
+    detalle: 'Chompa de mujer para el invierno',
+    genero:'hombre',
+    price:'150,00',
+    imgPath:
+      'https://cachemirasss.cl/wp-content/uploads/2018/04/11-invierno-cachemiras-ss-chalecos-sueter-ropa-chile-santiago-moda-lana.jpg',
+  },
+  {
+    name: 'chopa ligera',
+    detalle: 'Chompa para hombre para verano',
+    genero:'hombre',
+    price:'150,00',
+    imgPath:
+      'https://i.pinimg.com/236x/bb/60/b3/bb60b302d887bd706311f0edd33c6a8f.jpg',
+  },
+  {
+    name: 'chopa ligera',
+    detalle: 'Chompa de mujer para el invierno',
+    genero:'hombre',
+    price:'150,00',
+    imgPath:
+      'https://cachemirasss.cl/wp-content/uploads/2018/05/13-invierno-cachemiras-ss-chalecos-sueter-ropa-chile-santiago-moda-lana.jpg',
+  },
+  {
+    name: 'chopa ligera',
+    detalle: 'Chompa para hombre para verano',
+    genero:'hombre',
+    price:'150,00',
+    imgPath:
+      'https://img.menzig.style/f/4100/4100-f7.jpg',
+  },
+  
+];
+
+const slider = [
   {
     name: 'compras a la moda',
     detalle: 'MODA EN TIEMPO DE CALOR',
     price:250,
     boton1: 'MODA TODOS',
     imgPath:
-      'https://media.glamour.mx/photos/6190b55da6e030d64810433b/master/w_1600%2Cc_limit/164081.jpg',
+      'https://cachemirasss.cl/wp-content/uploads/2018/05/slider-020-cachemiras-ss-chalecos-sueter-ropa-chile-santiago-moda-lana.jpg',
   },
   {
     name: 'Traje de Mujer',
@@ -23,7 +75,7 @@ const images = [
     price:300,
     boton1: 'MODA MUJER',
     imgPath:
-      'https://img.freepik.com/foto-gratis/retrato-nina-hipster-vasos-pared-rosa_169016-1401.jpg',
+      'https://imgscf.slidemembers.com/docs/1/1/418/women_s_sports_wear_google_slides_template_design_417219.jpg',
   },
   {
     name: 'trajes para Parejas',
@@ -31,7 +83,7 @@ const images = [
     price:280,
     boton1: 'MODA HOMBRE',
     imgPath:
-      'https://st3.depositphotos.com/1017228/18617/i/450/depositphotos_186174862-stock-photo-portrait-of-a-happy-young.jpg',
+      'http://www.modasthaimar.com/modules/fieldslideshow/images/slider_modas_thaimar_02-319.jpg',
   },
   {
     name: 'Camiseta de Hombre',
@@ -39,63 +91,65 @@ const images = [
     price:420,
     boton1: 'MODA HOMBRE',
     imgPath:
-      'https://img.freepik.com/foto-gratis/retrato-guapo-sonriente-elegante-joven-modelo-vestido-ropa-jeans-hombre-moda_158538-5030.jpg',
+      'https://elonce-media.elonce.com/fotos-nuevo/2022/10/05/o_1664998193.jpg',
   },
   
 ];
 
 
 
+  
 const pages = ['ROPA', 'ZAPATOS', 'ACCESORIOS'];
-
-
-const data = [
-  {
-    src: 'https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ',
-    title: 'Don Diablo @ Tomorrowland Main Stage 2019 | Official…',
-    channel: 'Don Diablo',
-    views: '396k views',
-    createdAt: 'a week ago',
-  },
-  {
-    src: 'https://i.ytimg.com/vi/_Uu12zY01ts/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCpX6Jan2rxrCAZxJYDXppTP4MoQA',
-    title: 'Queen - Greatest Hits',
-    channel: 'Queen Official',
-    views: '40M views',
-    createdAt: '3 years ago',
-  },
-  {
-    src: 'https://i.ytimg.com/vi/kkLk2XWMBf8/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLB4GZTFu1Ju2EPPPXnhMZtFVvYBaw',
-    title: 'Calvin Harris, Sam Smith - Promises (Official Video)',
-    channel: 'Calvin Harris',
-    views: '130M views',
-    createdAt: '10 months ago',
-  },
-];
-
 
 
 
 
 function App() {
 
+  const [searchValue, setSearchValue] = React.useState('')
+  let searchedItem = []
+  if(searchValue.length>0){
+    searchedItem= clothes.filter(item => {
+      const todoText = item.name.toLowerCase()
+      const searchText = searchValue.toLowerCase()
+      return todoText.includes(searchText)
+    })
+  }
   const themes = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = images.length;
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const maxSteps = slider.length;
+  const [anchorMenu, setAnchorMenu] = React.useState(false);
 
   return (
     <ThemeProvider theme={theme}>
-      <>
-        <MainNav anchorElNav={anchorElNav} setAnchorElNav={setAnchorElNav} pages={pages}/>
-        <Carousel theme={theme} themes={themes} activeStep={activeStep} setActiveStep={setActiveStep} images={images} maxSteps={maxSteps}/>
-        <Box sx={{width:'100%', height:'20px' ,direction:'flex',textAlign:'center'}}>
-          <Typography >NOVEDADES</Typography>
+      
+        <MainNav 
+        theme={theme}
+        anchorMenu={anchorMenu} 
+        setAnchorMenu={setAnchorMenu} 
+        pages={pages} 
+        searchValue={searchValue} 
+        setSearchValue={setSearchValue}
+        />
+        <CarouselSlider
+        theme={theme} 
+        themes={themes} 
+        activeStep={activeStep} 
+        setActiveStep={setActiveStep} 
+        slider={slider} 
+        maxSteps={maxSteps}
+        />
+        <Box  minWidth={360} maxWidth={1024} margin={'auto'} padding={'0 16px'} >
+          <CarouselCard 
+          clothes={clothes}
+          />
+          <SearcherCard
+          searchValue={searchValue}
+          searchedItem={searchedItem}
+          />
         </Box>
-        <CardProduct images={images}/>
-      </>
     </ThemeProvider>
-  );
+  )
 }
 
 export default App;

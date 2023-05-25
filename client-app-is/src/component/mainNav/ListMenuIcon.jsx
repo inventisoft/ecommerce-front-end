@@ -1,20 +1,53 @@
 
 import * as React from 'react';
-import Divider from '@mui/material/Divider';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from "@mui/material/Typography";
-import { MenuList } from '@mui/material';
+import { Box, List, ListItem, ListItemButton, ListItemText, SwipeableDrawer } from '@mui/material';
 
 
 
 
-function  ListMenuIcon ({anchorElNav,setAnchorElNav, pages}) {
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+function  ListMenuIcon ({anchorMenu, setAnchorMenu, pages}) {
+    
+    const toggleDrawer = (open) => (event) => {
+        if (
+        event &&
+        event.type === 'keydown' &&
+        (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+        return;
+    }
+
+    setAnchorMenu({ ...anchorMenu, open });
+    }
+
+    const list = () => (
+    <Box
+        sx={{ width: 250 }}
+        role="presentation"
+        onClick={toggleDrawer(false)}
+        onKeyDown={toggleDrawer(false)}
+    >
+        <List>
+            {pages.map((page) => (
+            <ListItem key={page} disablePadding>
+                <ListItemButton>
+                    <ListItemText primary={page} />
+                </ListItemButton>
+            </ListItem>
+            ))}
+        </List>
+    </Box>
+    );
     return(
-        <Menu    
+    <>
+        <SwipeableDrawer
+            anchor={'left'}
+            open={anchorMenu}
+            onClose={toggleDrawer(false)}
+            onOpen={toggleDrawer(true)}
+        >
+        {list()}
+        </SwipeableDrawer>
+        {/*<Menu    
             sx={{
             display: { xs: 'block', md: 'none',borderRadius:0},
             top:'-60px',
@@ -38,7 +71,9 @@ function  ListMenuIcon ({anchorElNav,setAnchorElNav, pages}) {
                 </MenuItem>
             </MenuList>
             ))}
-        </Menu>
+            </Menu>*/}
+    </>
+        
     );
 }
 export {ListMenuIcon}

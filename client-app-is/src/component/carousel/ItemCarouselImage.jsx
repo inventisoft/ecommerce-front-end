@@ -1,11 +1,11 @@
 import React from "react";
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import Box from '@mui/material/Box';
+import { CardMedia } from "@mui/material";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-function  ItemCarouselImage ({themes,activeStep,setActiveStep,images}) {
+function  ItemCarouselImage ({themes,activeStep,setActiveStep,slider}) {
     
     const handleStepChange = (step) => {
         setActiveStep(step);
@@ -19,13 +19,13 @@ function  ItemCarouselImage ({themes,activeStep,setActiveStep,images}) {
             onChangeIndex={handleStepChange}
             enableMouseEvents
         >
-        {images.map((img, index) => (
+        {slider.map((item, index) => (
             <div 
             
-            key={img.name}>
+            key={item.name}>
             {Math.abs(activeStep - index) <= 0 ? (
                 <>
-                    <Box
+                    <CardMedia
                     component="img"
                     sx={{
                         display: { xs: 'block', sm: 'none' },
@@ -34,10 +34,10 @@ function  ItemCarouselImage ({themes,activeStep,setActiveStep,images}) {
                         width:'100%',
                         overflow:'hidden',
                     }}
-                    src={img.imgPath}
-                    alt={img.name}
+                    src={item.imgPath}
+                    alt={item.name}
                     />
-                    <Box
+                    <CardMedia
                     component="img"
                     sx={{
                         display: { xs: 'none', sm: 'block', md: 'none' },
@@ -46,10 +46,10 @@ function  ItemCarouselImage ({themes,activeStep,setActiveStep,images}) {
                         width:'100%',
                         overflow:'hidden',
                     }}
-                    src={img.imgPath}
-                    alt={img.name}
+                    src={item.imgPath}
+                    alt={item.name}
                     />
-                    <Box
+                    <CardMedia
                     component="img"
                     sx={{
                         display: { xs: 'none', sm: 'none', md: 'block' },
@@ -58,8 +58,8 @@ function  ItemCarouselImage ({themes,activeStep,setActiveStep,images}) {
                         width:'100%',
                         overflow:'hidden',
                     }}
-                    src={img.imgPath}
-                    alt={img.name}
+                    src={item.imgPath}
+                    alt={item.name}
                     />
                 </>
                 

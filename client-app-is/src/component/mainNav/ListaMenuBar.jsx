@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { Box, Button} from '@mui/material';
 
-function  ListMenuBar ({setAnchorElNav, pages}) {
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+function  ListMenuBar ({anchorMenu,setAnchorMenu, pages}) {
+
 
     return(
         <Box 
@@ -14,12 +12,12 @@ function  ListMenuBar ({setAnchorElNav, pages}) {
             {pages.map((page) => (
                 <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                
                 sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                     {page}
                 </Button>
-            ))} 
+            ))}
         </Box>
     );
 }

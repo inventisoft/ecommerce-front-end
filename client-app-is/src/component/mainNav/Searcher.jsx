@@ -3,9 +3,13 @@ import React from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, InputBase } from '@mui/material';
 
-function  Searcher (props) {
+function  Searcher ({searchValue,setSearchValue}) {
 
-    const Search = styled('div')(({ theme }) => ({
+  const onSearchValueChange = (e) => {
+    setSearchValue(e.target.value)
+
+  }
+  const Search = styled('div')(({ theme }) => ({
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
         backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -44,10 +48,7 @@ function  Searcher (props) {
           transition: theme.transitions.create('width'),
           width: '100%',
           [theme.breakpoints.up('sm')]: {
-            width: '16ch',
-            '&:focus': {
-                width: '100%',
-              },
+            width: '100%',
           },
         },
       }));
@@ -61,15 +62,17 @@ function  Searcher (props) {
             
             }}
         >
-        <Search>
-            <SearchIconWrapper>
-                <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-            />
-        </Search>
+          <Search>
+              <SearchIconWrapper>
+                  <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                  placeholder="Buscar…"
+                  inputProps={{ 'aria-label': 'search' }}
+                  value={searchValue}
+                  onChange={onSearchValueChange}
+              />
+          </Search>
         </Box>
     );
 }

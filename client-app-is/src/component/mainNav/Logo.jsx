@@ -10,20 +10,23 @@ import { Box } from '@mui/material';
 function  Logo () {
     return(
         <>
+            <Box
+            sx={{ 
+                alignSelf: 'center',
+            }}
+            >
             <IconButton
             color="inherit"
             aria-label="menu"
             size="large"
-            sx={{
-
-            }}
+            
             >
                 <StorefrontIcon
                 sx={{fontSize: 30}}
                 >
                 </StorefrontIcon>
             </IconButton>
-
+            </Box>
             <Typography 
             variant="h5" 
             color="inherit" 

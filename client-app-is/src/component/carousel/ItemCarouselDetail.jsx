@@ -2,10 +2,11 @@
 import React from "react";
 import { Box, Button, Typography } from '@mui/material';
 
-function  ItemCarouselDetail ({theme, activeStep,images}) {
+function  ItemCarouselDetail ({theme, activeStep,slider}) {
     
     return(
-        <Box sx={{minWidth:'180px', width:'50%',maxWidth:'400px', height:'212px', position:'absolute', top: '80px'}}>
+        <>
+        <Box sx={{ minWidth:'180px', width:'50%',maxWidth:'400px', position:'absolute', top: '56px'}}>
             <Box
             color={theme.palette.grey.main}
             sx={{
@@ -28,7 +29,7 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                     padding:'5px 24px 5px 16px',
                     }}
                 >
-                    {images[activeStep].name}
+                    {slider[activeStep].name}
                 </Typography>
 
                 <Typography 
@@ -38,7 +39,7 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                     }}
                     fontFamily={theme.typography.secondary}
                 >
-                    {images[activeStep].detalle}
+                    {slider[activeStep].detalle}
                 </Typography>
                 <div>
                     <Button
@@ -50,13 +51,14 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                         variant="outlined" size="small"
                     >
                         <Typography variant="caption">
-                            {images[activeStep].boton1}
+                            {slider[activeStep].boton1}
                         </Typography>
                     </Button>
                 </div>
             </Box>
-            
-            <Box
+        </Box>    
+        <Box sx={{ minWidth:'180px', width:'50%',maxWidth:'400px', position:'absolute', top: '64px'}}>
+        <Box
             color={theme.palette.grey.main}
             sx={{
                 display: { xs: 'none', sm: 'flex', md: 'none' },
@@ -67,7 +69,6 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                 borderRadius:'0 50% 50% 0',
                 background:'rgba(255,255,255,0.4)',
                 padding:'10px 0',
-                minWidth:'180px',
             }}
             >
                 <Typography 
@@ -78,7 +79,7 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                     padding:'12px 24px 12px 16px',
                     }}
                 >
-                    {images[activeStep].name}
+                    {slider[activeStep].name}
                 </Typography>
                 <Typography 
                     sx={{
@@ -87,7 +88,7 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                     }}
                     fontFamily={theme.typography.secondary2}
                 >
-                    {images[activeStep].detalle}
+                    {slider[activeStep].detalle}
                 </Typography>
 
                 <div>
@@ -99,15 +100,19 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                     }}
                     variant="outlined" size="medium"
                 >
-                    <Typography variant="caption">{images[activeStep].boton1}</Typography>
+                    <Typography variant="caption">{slider[activeStep].boton1}</Typography>
                 </Button>
                 
                 </div>
             </Box>
+        </Box>    
+            
+        
+        <Box sx={{ minWidth:'180px', width:'50%',maxWidth:'400px', position:'absolute', top: '68.5px'}}>
             <Box
             color={theme.palette.grey.main}
             sx={{
-                display: { xs: 'none', sm: 'none', md: 'flex' },
+                display:{xs: 'none', sm: 'none', md: 'flex' },
                 height:'404px',
                 textAlign:'center',
                 flexDirection:'column',
@@ -115,7 +120,6 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                 borderRadius:'0 50% 50% 0',
                 background:'rgba(255,255,255,0.4)',
                 padding:'10px 0',
-                minWidth:'180px',
             }}
             >
                 <Typography 
@@ -126,7 +130,7 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                     padding:'16px 24px 16px 16px',
                     }}
                 >
-                    {images[activeStep].name}
+                    {slider[activeStep].name}
                 </Typography>
                 <Typography 
                     sx={{
@@ -135,7 +139,7 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                     }}
                     fontFamily={theme.typography.secondary3}
                 >
-                    {images[activeStep].detalle}
+                    {slider[activeStep].detalle}
                 </Typography>
                 <div>
                     <Button
@@ -146,12 +150,12 @@ function  ItemCarouselDetail ({theme, activeStep,images}) {
                         }}
                         variant="outlined" size="large"
                     >
-                        <Typography variant="caption">{images[activeStep].boton1}</Typography>
+                        <Typography variant="caption">{slider[activeStep].boton1}</Typography>
                     </Button>
                 </div>
-              
             </Box>
-        </Box>
+        </Box>   
+        </>
     )
 }
 export {ItemCarouselDetail}
