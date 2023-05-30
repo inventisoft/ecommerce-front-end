@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Switch from '@mui/material/Switch';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../appStore';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import HomeIcon from '@mui/icons-material/Home';
+import ModeNightIcon from '@mui/icons-material/ModeNight';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 
 
@@ -68,7 +70,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function Sidenav() {
+export default function Sidenav( {mode,setMode} ) {
   const theme = useTheme();
   // const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
@@ -147,6 +149,16 @@ export default function Sidenav() {
                 <ListItemText primary='Categoria' sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
+            <ListItem disablePadding>
+            <ListItemButton component="a" href="#simple-list">
+              <ListItemIcon>
+                <ModeNightIcon />
+              </ListItemIcon>
+              <Switch 
+              onChange={e=>setMode(mode === "light" ? "dark" : "light")}
+              />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
     </Box>

@@ -17,7 +17,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useAppStore } from '../appStore';
 import { useState } from "react";
 import { Box, FormGroup, Switch, FormControlLabel } from '@mui/material';
-import { useAppState } from '../state/appState';
 
 const AppBar = styled(MuiAppBar, {
 })(({ theme }) => ({
@@ -65,12 +64,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar() {
-  // const [anchorEl, setAnchorEl] = React.useState(null);
+export default function Navbar({mode,setMode}) {
+
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const updateOpen = useAppStore((state) => state.updateOpen);
   const dopen = useAppStore((state) => state.dopen);
-  const { state, dispatch } = useAppState();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -89,15 +87,7 @@ export default function Navbar() {
     handleMobileMenuClose();
   };
 
-  // const handleMobileMenuOpen = (event) => {
-  //   setMobileMoreAnchorEl(event.currentTarget);
-  // };
-  const switchThemeMode = () => {
-    dispatch({ type: 'theme-switch'})
-  }
-
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -116,7 +106,6 @@ export default function Navbar() {
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
-  );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -221,9 +210,7 @@ export default function Navbar() {
                 size="large"
                 edge="end"
                 aria-label="account of current user"
-                // aria-controls={menuId}
                 aria-haspopup="true"
-                // onClick={handleProfileMenuOpen}
                 color="inherit"
             >
               <AccountCircle />
@@ -231,7 +218,6 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      
             <Menu
               id="settings-menu"
               anchorEl={anchorEl}
@@ -241,15 +227,13 @@ export default function Navbar() {
                       <FormGroup>
                         <FormControlLabel
                             control={<Switch 
-                              onClick={() => switchThemeMode()}
+                              onChange={e=>setMode(mode === "light" ? "dark" : "light")}
                             />}
-                            label={ state.theme === 'light'? 'Light' : 'Dark'}
                         />
                       </FormGroup>
                 </MenuItem>
           </Menu>
       {renderMobileMenu}
-      {/* {renderMenu} */}
     </Box>
   );
 }

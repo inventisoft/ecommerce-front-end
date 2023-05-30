@@ -1,9 +1,9 @@
 
 import { Routes, Route, BrowserRouter} from 'react-router-dom'
-import Product from "./page/Product";
 import Home from "./page/Home";
-import Categoria from "./page/Category";
+import CategoryIndex from './page/category/CategoryIndex';
 import AppState from './state/appState';
+import ProductIndex from './page/product/ProductIndex';
 
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
             <BrowserRouter>
                 <Routes>
                   <Route path="/" exact element={<Home />} />
-                  <Route path="/producto" exact element={<Product />} />
-                  <Route path="/categoria" exact element={<Categoria />} />
+                  <Route path="/producto" exact element={<ProductIndex />} />
+                  <Route path="/categoria" exact element={<CategoryIndex />} />
                 </Routes>
             </BrowserRouter>
           </AppState>
