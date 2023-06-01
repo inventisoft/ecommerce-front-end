@@ -193,7 +193,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Lista de Productos
         </Typography>
       )}
 
