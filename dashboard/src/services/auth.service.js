@@ -4,7 +4,7 @@ const AuthServices = {
     
     login: async (credentials) => {
         try {
-            return await API.post('/user/login', credentials, { headers: {'Content-Type': 'multipart/form-data'} })
+            return await API.post('/http://localhost:8090/api/', credentials, { headers: {'Content-Type': 'multipart/form-data'} })
         } catch (e) {
             console.log(e)
         }
