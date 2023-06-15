@@ -1,9 +1,9 @@
 import API from "../conection/conection"
-import authHeader from './autHeader'
+//import authHeader from './autHeader'
 
 const CrudServices = {
 
-    getUsers: async (filters = {}) => {
+    /* getUsers: async (filters = {}) => {
         let response = {}
         await API.get('/usuario/index', { params: filters, headers: authHeader()})
             .then(res => response = res)
@@ -80,17 +80,17 @@ const CrudServices = {
             .then(res => response = res)
             .catch(error => response = error.response)
         return response
-    },
+    }, */
 
-    getProduct: async (filters= {}) => {
-        let response = {}
-        await API.get('/product/index', { params: filters, headers: authHeader() })
-        .then(res => response = res)
+    getProducts: async (filters= {}) => {
+        let response = []
+        await API.get('products', { params: filters })
+        .then(res => response = res.data)
         .catch(error => response = error.response)
         return response
     },
 
-    createProduct: async (data) => {
+ /*    createProduct: async (data) => {
         let response = {}
         await API.post('/product/create', data, {headers: authHeader({'Content-Type' : 'multipart/form-data' })})
             .then(res => {
@@ -135,7 +135,7 @@ const CrudServices = {
                 response = error.response ? error.response : {}
             })
         return response
-    },
+    }, */
 }
 
 export default CrudServices
