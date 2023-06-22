@@ -3,7 +3,8 @@ import Box from '@mui/material/Box';
 import TableProduct from '../../components/product/TableProduct';
 import { useEffect, useRef, useState } from 'react';
 import CrudServices from '../../services/crud.service';
-// import { useDispatch} from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux'
+// import { setMessage } from '../../store/messageSlice';
 
 
 export default function ProductIndex() {
@@ -28,12 +29,39 @@ export default function ProductIndex() {
       if(response.status === 200) {
         productList = response.data.data
         setPagination(response.data.pagination)
-      }
+      } 
       setProducts(productList)
       setLoading(false) 
     }
     loadProducts(allFilters)
   }, [allFilters])
+
+  useEffect(() => {
+    if(!showFormDialog) setProductSelected(null)
+  }, [showFormDialog])
+
+  useEffect(() => {
+    if(!showInfoDialog) setProductSelected(null)
+  }, [showInfoDialog])
+
+  useEffect(() => {
+    if(!showDeleteDialog) setProductSelected(null)
+  }, [showDeleteDialog])
+
+  const handleSumit = () => {
+    if(formRef.current) {
+      formRef.current.handleSumit()
+    }
+  }
+
+  const handleDelete = async () => {
+    if(productSelected) {
+      const response = await CrudServices.deleteProduct(productSelected.id)
+      if(response.status === 204) {
+        
+      }
+    }
+  }
 
 
   return (
