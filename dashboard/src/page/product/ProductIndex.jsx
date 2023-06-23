@@ -36,6 +36,7 @@ export default function ProductIndex() {
     loadProducts(allFilters)
   }, [allFilters])
 
+  
   useEffect(() => {
     if(!showFormDialog) setProductSelected(null)
   }, [showFormDialog])
